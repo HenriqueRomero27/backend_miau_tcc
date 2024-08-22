@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid()) 
+  cpf String 
+  name String
+  birthday DateTime
+  email String
+  phone String
+
+  adoptionApplication AdoptionApplication[]
+  
+  address Address?
+}
+
+model Animal {
+  id String @id @default(uuid())
+  name String
+  age Int
+  gender String
+  breed String //Raça
+  fur String //Pelagem
+  furColor String //Cor da Pelagem
+  temperament String
+  neutred String //Castrado
+  notes String //Observação
+  photos String[]
+
+  adoptionShelter AdoptionShelter @relation(fields: [adoptionShelterId], references: [id])
+  adoptionShelterId String
+
+  adoptionApplication AdoptionApplication[]
+}
+
+model AdoptionShelter {
+  id String @id @default(uuid()) 
+  cnpj String
+  photos String[]
+  logo String
+  phone String
+  email String
+  animals Animal[]
+  address Address?
+}
+
+model AdoptionApplication {
+  id String @id @default(uuid())
+
+  user User @relation(fields: [userId], references: [id])
+  userId String
+
+  animal Animal @relation(fields: [animalId], references: [id])
+  animalId String
+}
+
+model Address {
+  id String @id @default(uuid())
+  street String
+  cep String
+  complement String
+  neighborhood String
+  city String
+  state String
+  number Int
+
+  user User @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  adoptionShelter AdoptionShelter @relation(fields: [adoptionShelterId], references: [id])
+  adoptionShelterId String @unique
+}
