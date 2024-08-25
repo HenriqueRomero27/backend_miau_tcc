@@ -24,6 +24,8 @@ model User {
   adoptionApplication AdoptionApplication[]
   
   address Address?
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 model Animal {
@@ -43,6 +45,8 @@ model Animal {
   adoptionShelterId String
 
   adoptionApplication AdoptionApplication[]
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 model AdoptionShelter {
@@ -54,6 +58,8 @@ model AdoptionShelter {
   email String
   animals Animal[]
   address Address?
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 model AdoptionApplication {
@@ -64,6 +70,8 @@ model AdoptionApplication {
 
   animal Animal @relation(fields: [animalId], references: [id])
   animalId String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 model Address {
