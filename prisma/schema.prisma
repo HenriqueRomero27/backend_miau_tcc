@@ -20,6 +20,7 @@ model User {
   birthday DateTime
   email String
   phone String
+  password String
 
   adoptionApplication AdoptionApplication[]
   
@@ -56,6 +57,7 @@ model AdoptionShelter {
   logo String
   phone String
   email String
+  password String
   animals Animal[]
   address Address?
   created_at DateTime @default(now())
