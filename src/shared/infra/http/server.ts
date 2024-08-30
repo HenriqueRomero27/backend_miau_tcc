@@ -3,7 +3,7 @@ import express from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 import { errors } from 'celebrate';
-import routes from './routes';
+import routes from './routes/routes';
 
 const app = express();
 
