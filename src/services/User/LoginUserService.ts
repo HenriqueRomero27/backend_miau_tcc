@@ -1,51 +1,54 @@
-import { User } from "@prisma/client";
-import { compare } from "bcryptjs";
-import AppError from "../../shared/error/AppError";
-import { sign } from "crypto";
-import authConfig from "../../config/auth";
+import { compare } from "bcryptjs"
+import { sign } from "jsonwebtoken"
+import auth from "../../config/auth";
 import prismaClient from "../../prisma/prisma";
 
-interface IRequest {
-    email: string,
+interface AuthRequest {
+    email: string;
     password: string
 }
 
-interface IResponse {
-    user: User;
-    token: string;
-}
+class LoginUserService {
+    async execute({ email, password }: AuthRequest) {
 
-class CreateSessionService {
-    public async execute({ email, password }: IRequest): Promise<IResponse> {
+        //Verificar se o Email existe
         const user = await prismaClient.user.findFirst({
             where: {
                 email: email
             }
-        });
+        })
 
         if (!user) {
-            throw new AppError('Incorret email/password combination.', 401);
+            throw new Error("Usuário ou senha incorreto")
         }
 
-        const passwordConfirmed = await compare(password, user.password);
-        if (!passwordConfirmed) {
-            throw new AppError('Incorret email/password combination.', 401);
+        // Precisa verifficar se a senha que o usuário digitou está correta
+        const passwordMatch = await compare(password, user.password)
+
+        if (!passwordMatch) {
+            throw new Error("Usuário ou senha incorreto")
         }
 
+        //Gerar um Tokem JWT e devolver os dados do usuário: id, name e email // Se deu tudo certo, vamos gerar o Token do usuário
         const token = sign(
             {
                 name: user.name,
-                email: user.email,
-                password: user.password
-            }, authConfig.jwt.secret, {
-            subject: user.id,
-            expiresIn: authConfig.jwt.expiresIn
-        });
+                email: user.email
+            },
+            auth.jwt.secret,
+            {
+                subject: user.id,
+                expiresIn: '30d'
+            }
+        )
 
         return {
-            user,
-            token
-        };
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            token: token
+        }
     }
 }
-export default CreateSessionService;
+
+export { LoginUserService }
