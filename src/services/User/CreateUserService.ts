@@ -4,9 +4,9 @@ import { hash } from "bcryptjs";
 import AppError from "../../shared/error/AppError";
 
 class CreateUserService {
-    async execute({name, email, password}: UserRequest) {
+    async execute({name, email, password, phone, birthday, address, cpf, created_at, updated_at}: UserRequest) {
         if (!email) {
-            throw new Error("Email incorreto ")
+            throw new AppError("Email incorreto", 400)
         }
 
         //Verificar se este email ja esta cadastrado
@@ -17,7 +17,7 @@ class CreateUserService {
         })
 
         if (userAlreadyExists) {
-            throw new Error("Usuário já existe")
+            throw new AppError("Usuário já existe", 400)
         }
 
         const passwordHash = await hash(password, 8)
@@ -26,12 +26,22 @@ class CreateUserService {
             data: {
                 name: name,
                 email: email,
-                password: passwordHash
+                password: passwordHash,
+                phone: phone,
+                birthday: birthday,
+                address: {},
+                cpf: cpf,
+                created_at: created_at,
+                updated_at: updated_at
             },
             select: {
                 id: true,
                 name: true,
                 email: true,
+                phone: true,
+                birthday: true,
+                address: true,
+                cpf: true
             }
         })
 
