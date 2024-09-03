@@ -17,7 +17,7 @@ model User {
   id String @id @default(uuid()) 
   cpf String 
   name String
-  birthday DateTime
+  birthday String
   email String
   phone String
   password String

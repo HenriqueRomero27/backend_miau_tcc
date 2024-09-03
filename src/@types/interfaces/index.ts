@@ -4,7 +4,7 @@ interface UserRequest {
     email: string,
     name: string,
     password: string,
-    birthday: Date,
+    birthday: string,
     cpf: string,
     address: Address,
     phone: string,

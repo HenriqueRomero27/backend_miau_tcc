@@ -14,4 +14,6 @@ app.use(routes);
 
 app.use(errors());
 
-app.listen(3000, () => console.log('Server is running 🏆'))
+const port = 3000
+
+app.listen(port, () => console.log(`Server is running 🏆 at port: ${port}`))
