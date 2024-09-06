@@ -1,6 +1,6 @@
 import authConfig from "../../../../config/auth";
 import AppError from "../../../error/AppError";
-import {NextFunction, Request, Response} from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
 interface ITokenPayload {
@@ -9,11 +9,22 @@ interface ITokenPayload {
     sub: string;
 }
 
-export default function isAuthenticated(req: Request, next: NextFunction): void {
+// Extensão do tipo Request para incluir a propriedade `user`
+declare global {
+    namespace Express {
+        interface Request {
+            user: {
+                id: string;
+            };
+        }
+    }
+}
+
+export default function isAuthenticated(req: Request, res: Response, next: NextFunction): void {
     const authHeader = req.headers.authorization;
     const statusCode = 400;
 
-    if(!authHeader) {
+    if (!authHeader) {
         throw new AppError("JWT token is missing", statusCode);
     }
 
@@ -24,8 +35,8 @@ export default function isAuthenticated(req: Request, next: NextFunction): void 
         const { sub } = decodedToken as ITokenPayload;
 
         req.user = {
-            id:sub
-        }
+            id: sub
+        };
 
         return next();
     } catch {
