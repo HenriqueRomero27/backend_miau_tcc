@@ -1,4 +1,4 @@
-import { Address, AdoptionApplication, AdoptionShelter } from "@prisma/client"
+import { Address, AdoptionApplication, AdoptionShelter, Animal } from "@prisma/client"
 
 interface UserRequest {
     email: string,
@@ -30,4 +30,17 @@ interface AnimalRequest {
     adoptionApplication: AdoptionApplication
 }
 
-export {UserRequest, AnimalRequest}
+interface AdoptionShelterRequest {
+    cnpj: string,
+    photos: string[],
+    logo: string,
+    phone: string,
+    email: string,
+    password: string,
+    animals: Animal[],
+    address: Address,
+    created_at: Date,
+    updated_at: Date
+}
+
+export {UserRequest, AnimalRequest, AdoptionShelterRequest}

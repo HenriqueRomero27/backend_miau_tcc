@@ -1,6 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 
+import { UserController } from "../../../../controllers/User/UserController";
 import { LoginUserController } from "../../../../controllers/User/LoginUserController";
 
 import isAuthenticated from "../middleware/isAuthenticated"; // Ajuste se necessário
@@ -24,7 +25,6 @@ router.put("/users/:userId", userController.update);
 router.delete("/users/:userId", userController.delete);
 
 import { AnimalController } from "../../../../controllers/Animal/AnimalController"; 
-import { UserController } from "../../../../controllers/User/UserController";
 
 const animalController = new AnimalController();
 router.use(isAuthenticated);

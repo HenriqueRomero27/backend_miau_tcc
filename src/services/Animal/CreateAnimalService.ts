@@ -3,7 +3,21 @@ import prismaClient from "../../prisma/prisma";
 import AppError from "../../shared/error/AppError";
 
 class CreateAnimalService {
-    async execute({name, ra, age, gender, breed, fur, furColor, temperament, neutred, notes, photos, created_at, updated_at, adoptionApplication, adoptionShelter}: AnimalRequest) {
+    async execute({name, 
+        ra, 
+        age, 
+        gender, 
+        breed, 
+        fur, 
+        furColor, 
+        temperament, 
+        neutred, 
+        notes, 
+        photos, 
+        created_at, 
+        updated_at,
+        adoptionApplication, 
+        adoptionShelter}: AnimalRequest) {
 
         //Verificar se este email ja esta cadastrado
         const animalAlreadyExists = await prismaClient.animal.findFirst({

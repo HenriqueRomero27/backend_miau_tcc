@@ -8,15 +8,27 @@ import AppError from "../../shared/error/AppError";
 
 class AnimalController {
     async create(req: Request, res: Response) {
+        const {name, ra, age, gender, breed, fur, furColor, temperament, neutred, notes, photos, created_at, updated_at, adoptionApplication, adoptionShelter} = req.body
         const createAnimalService = new CreateAnimalService();
-        try {
-            const animal = await createAnimalService.execute(req.body);
-            return res.status(201).json(animal);
-        } catch (error) {
-            if(error instanceof AppError) {
-                return res.status(error.statusCode || 500).json({ message: error.message });
-            }
-        }
+        
+        const animal = await createAnimalService.execute({ 
+            name, 
+            ra, 
+            age, 
+            gender, 
+            breed, 
+            fur, 
+            furColor, 
+            temperament, 
+            neutred, 
+            notes,
+             photos, 
+            created_at, 
+            updated_at, 
+            adoptionApplication, 
+            adoptionShelter})
+
+        return res.json(animal)
     }
 
     async findAll(req: Request, res: Response) {
