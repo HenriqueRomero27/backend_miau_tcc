@@ -2,7 +2,7 @@ import { AnimalRequest, UserRequest } from "../../@types/interfaces";
 import prismaClient from "../../prisma/prisma";
 import AppError from "../../shared/error/AppError";
 
-class CreateUserService {
+class CreateAnimalService {
     async execute({name, ra, age, gender, breed, fur, furColor, temperament, neutred, notes, photos, created_at, updated_at, adoptionApplication, adoptionShelter}: AnimalRequest) {
 
         //Verificar se este email ja esta cadastrado
@@ -62,4 +62,4 @@ class CreateUserService {
     }
 }
 
-export { CreateUserService }
+export { CreateAnimalService }

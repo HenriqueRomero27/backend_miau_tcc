@@ -19,7 +19,7 @@ class LoginUserService {
         });
 
         if (!user) {
-            throw new AppError("Usuário ou senha incorreto", 401);
+            throw new AppError("[ERROR] Usuário não encontrado!", 401);
         }
 
         // Verificar se a senha está correta
