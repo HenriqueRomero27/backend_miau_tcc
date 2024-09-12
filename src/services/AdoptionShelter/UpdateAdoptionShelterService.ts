@@ -13,7 +13,7 @@ class UpdateAdoptionShelterService {
         animals, // Lista de IDs dos animais
         address,
         updated_at
-    }: Partial<AdoptionShelterRequest>) {
+    }: AdoptionShelterRequest) {
 
         // Verificar se o abrigo de adoção existe
         const adoptionShelter = await prismaClient.adoptionShelter.findUnique({
@@ -33,10 +33,7 @@ class UpdateAdoptionShelterService {
                 phone: phone ?? adoptionShelter.phone,
                 email: email ?? adoptionShelter.email,
                 password: password ?? adoptionShelter.password,
-                animals: animals ? {
-                    connect: animals.map((animalId) => ({ id: animalId }))
-                } : undefined,
-                address: address ?? adoptionShelter.address,
+                // animals: ,
                 updated_at: updated_at ?? adoptionShelter.updated_at
             },
             include: {

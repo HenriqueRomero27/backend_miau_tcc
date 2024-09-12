@@ -7,6 +7,7 @@ class CreateAdoptionShelterService {
         cnpj,
         photos,
         logo,
+        name,
         phone,
         email,
         password,
@@ -30,6 +31,7 @@ class CreateAdoptionShelterService {
         const adoptionShelter = await prismaClient.adoptionShelter.create({
             data: {
                 cnpj: cnpj,
+                name: name,
                 photos: photos,
                 logo: logo,
                 phone: phone,
@@ -44,6 +46,7 @@ class CreateAdoptionShelterService {
             },
             select: {
                 id: true,
+                name: true,
                 cnpj: true,
                 photos: true,
                 logo: true,

@@ -2,7 +2,7 @@ import prismaClient from "../../prisma/prisma";
 import AppError from "../../shared/error/AppError";
 
 class ListAdoptionShelterService {
-    async execute(id: string) {
+    async findById(id: string) {
         const adoptionShelter = await prismaClient.adoptionShelter.findUnique({
             where: { id },
             include: {
@@ -15,6 +15,18 @@ class ListAdoptionShelterService {
         }
 
         return adoptionShelter;
+    }
+    async findAll() {
+        const adoptionShelters = await prismaClient.adoptionShelter.findMany({
+            select: {
+                id: true,
+                email: true,
+                cnpj: true,
+                animals: true
+            }
+        });
+
+        return adoptionShelters;
     }
 }
 

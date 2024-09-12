@@ -35,4 +35,15 @@ router.get("/animals/:id", animalController.findById);
 router.put("/animals/:id", animalController.update);
 router.delete("/animals/:id", animalController.delete);
 
+import { AdoptionShelterController } from "../../../../controllers/AdoptionShelter/AdoptionShelterController";
+
+const adoptionShelterController = new AdoptionShelterController();
+router.use(isAuthenticated);
+
+router.post("/adoptionShelter", adoptionShelterController.create);
+router.get("/adoptionShelters", adoptionShelterController.findAll);
+router.get("/adoptionShelter/:id", adoptionShelterController.findById);
+router.put("/adoptionShelter/:id", adoptionShelterController.update);
+router.delete("/adoptionShelter/:id", adoptionShelterController.delete);
+
 export default router;

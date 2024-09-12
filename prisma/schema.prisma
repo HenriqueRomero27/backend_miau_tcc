@@ -49,23 +49,21 @@ model Animal {
   adoptionApplication AdoptionApplication[]
   created_at          DateTime              @default(now())
   updated_at          DateTime              @default(now())
-
-  AdoptionShelter AdoptionShelter[] @relation("ShelterAnimals")
 }
 
 model AdoptionShelter {
   id         String   @id @default(uuid())
   cnpj       String   @unique
+  name       String
   photos     String[]
   logo       String
   phone      String
   email      String   @unique
   password   String
-  animals    Animal[] @relation("ShelterAnimals")
+  animals    Animal[]
   address    Json // Usa o tipo JSON para armazenar um objeto complexo
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  Animal     Animal[]
   Address    Address?
 }
 

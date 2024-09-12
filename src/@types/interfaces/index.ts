@@ -32,6 +32,7 @@ interface AnimalRequest {
 
 interface AdoptionShelterRequest {
     cnpj: string,
+    name: string,
     photos: string[],
     logo: string,
     phone: string,

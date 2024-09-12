@@ -79,7 +79,7 @@ class UserController {
 
         try {
             const deletedUser = await deleteUserService.execute(userId);
-            return res.json(deletedUser);
+            return res.json(`User <b><i>${deletedUser.name}</b></i> deleted with succsses`);
         } catch (error) {
             if(error instanceof AppError) {
                 return res.status(error.statusCode || 500).json({ message: error.message });
