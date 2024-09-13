@@ -48,9 +48,6 @@ class CreateAnimalService {
                 adoptionApplication: {
                     connect: { id: adoptionApplication.id }
                 },
-                adoptionShelter: {
-                    connect: { id: adoptionShelter.id }
-                }
             },
             select: {
                 id: true,
@@ -66,7 +63,6 @@ class CreateAnimalService {
                 notes: true,
                 photos: true,
                 adoptionApplication: true,
-                adoptionShelter: true,
                 created_at: true,
                 updated_at: true
             }
