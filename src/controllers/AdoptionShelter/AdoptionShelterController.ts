@@ -61,21 +61,6 @@ class AdoptionShelterController {
         }
     }
 
-    // async get(req: Request, res: Response): Promise<Response> {
-    //     try {
-    //         const { id } = req.params;
-
-    //         const shelter = await this.listAdoptionShelterService.execute(id);
-
-    //         return res.status(200).json(shelter);
-    //     } catch (error) {
-    //        if(error instanceof AppError) {
-    //             return res.status(error.statusCode || 500).json({ message: error.message });
-    //         }
-    //         return res.status(500).json({ message: "Erro interno do servidor" });
-    //     }
-    // }
-
     async findAll(req: Request, res: Response) {
         const listAdoptionShelterService = new ListAdoptionShelterService();
         try {
@@ -137,7 +122,7 @@ class AdoptionShelterController {
            if(error instanceof AppError) {
                 return res.status(error.statusCode || 500).json({ message: error.message });
             }
-            return res.status(500).json({ message: "Erro interno do servidor" });
+            return res.status(500).json({ message: error });
         }
     }
 

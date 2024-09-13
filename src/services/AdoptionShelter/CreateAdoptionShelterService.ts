@@ -1,6 +1,8 @@
+import { hash } from "bcryptjs";
 import { AdoptionShelterRequest } from "../../@types/interfaces";
 import prismaClient from "../../prisma/prisma";
 import AppError from "../../shared/error/AppError";
+import { Animal } from "@prisma/client";
 
 class CreateAdoptionShelterService {
     async execute({
@@ -11,8 +13,20 @@ class CreateAdoptionShelterService {
         phone,
         email,
         password,
-        animals,
-        address,
+        animals: [{
+            ra,
+            animalName,
+            age,
+            gender,
+            breed,
+            fur,
+            furColor,
+            temperament,
+            neutred,
+            notes,
+            animalPhotos: []
+          }],
+        address: { street, cep, complement, neighborhood, city, state, number },
         created_at,
         updated_at
     }: AdoptionShelterRequest) {
@@ -28,6 +42,8 @@ class CreateAdoptionShelterService {
             throw new AppError("Adoção já existe", 400);
         }
 
+        const passwordHash = await hash(password, 8)
+
         const adoptionShelter = await prismaClient.adoptionShelter.create({
             data: {
                 cnpj: cnpj,
@@ -36,11 +52,29 @@ class CreateAdoptionShelterService {
                 logo: logo,
                 phone: phone,
                 email: email,
-                password: password,
-                animals: {
-                    // connect: animals.map((animalId) => ({ id: animalId }))
+                password: passwordHash,
+                animals: [{
+                    ra,
+                    animalName,
+                    age,
+                    gender,
+                    breed,
+                    fur,
+                    furColor,
+                    temperament,
+                    neutred,
+                    notes,
+                    animalPhotos: []
+                }],
+                address: {
+                    street, 
+                    cep,
+                    complement,
+                    neighborhood,
+                    city,
+                    state,
+                    number, 
                 },
-                address: address,
                 created_at: created_at,
                 updated_at: updated_at
             },
