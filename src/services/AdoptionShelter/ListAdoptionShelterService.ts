@@ -5,7 +5,7 @@ class ListAdoptionShelterService {
     async findById(id: string) {
         const adoptionShelter = await prismaClient.adoptionShelter.findUnique({
             where: { id },
-            include: {
+            select: {
                 animals: true // Incluindo animais relacionados
             }
         });
@@ -20,8 +20,12 @@ class ListAdoptionShelterService {
         const adoptionShelters = await prismaClient.adoptionShelter.findMany({
             select: {
                 id: true,
+                name: true,
                 email: true,
                 cnpj: true,
+                phone: true,
+                address: true,
+                logo: true,
                 animals: true
             }
         });

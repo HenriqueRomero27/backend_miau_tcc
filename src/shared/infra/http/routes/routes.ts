@@ -29,11 +29,11 @@ import { AnimalController } from "../../../../controllers/Animal/AnimalControlle
 const animalController = new AnimalController();
 router.use(isAuthenticated);
 
-router.post("/animals", animalController.create);
+router.post("/animal", animalController.create);
 router.get("/animals", animalController.findAll);
-router.get("/animals/:id", animalController.findById);
-router.put("/animals/:id", animalController.update);
-router.delete("/animals/:id", animalController.delete);
+router.get("/animal/:id", animalController.findById);
+router.put("/animal/:id", animalController.update);
+router.delete("/animal/:id", animalController.delete);
 
 import { AdoptionShelterController } from "../../../../controllers/AdoptionShelter/AdoptionShelterController";
 
