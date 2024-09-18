@@ -39,7 +39,7 @@ class CreateAdoptionShelterService {
         });
 
         if (shelterAlreadyExists) {
-            throw new AppError("Adoção já existe", 400);
+            throw new AppError("Casa de Adoção já existe", 400);
         }
 
         const passwordHash = await hash(password, 8);

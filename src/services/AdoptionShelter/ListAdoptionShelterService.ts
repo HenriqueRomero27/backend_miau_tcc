@@ -6,7 +6,14 @@ class ListAdoptionShelterService {
         const adoptionShelter = await prismaClient.adoptionShelter.findUnique({
             where: { id },
             select: {
-                animals: true // Incluindo animais relacionados
+                id: true,
+                name: true,
+                email: true,
+                cnpj: true,
+                phone: true,
+                address: true,
+                logo: true,
+                animals: true
             }
         });
 
