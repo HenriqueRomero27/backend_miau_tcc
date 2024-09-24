@@ -1,5 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
+import uploadConfig from "../../../../config/upload"
 
 import { UserController } from "../../../../controllers/User/UserController";
 import { LoginUserController } from "../../../../controllers/User/LoginUserController";
@@ -8,12 +9,14 @@ import isAuthenticated from "../middleware/isAuthenticated"; // Ajuste se necess
 
 const router = Router();
 
+const upload = multer(uploadConfig.upload("./uploads"))
+
 // Controllers
 const userController = new UserController();
 const loginUserController = new LoginUserController();
 
 // Public Routes
-router.post("/create-account", userController.create);
+router.post("/create-account", upload.single("file"), userController.create);
 router.post("/login", loginUserController.execute); // Login não deve usar isAuthenticated
 
 // Authenticated Routes
@@ -29,18 +32,18 @@ import { AnimalController } from "../../../../controllers/Animal/AnimalControlle
 const animalController = new AnimalController();
 router.use(isAuthenticated);
 
-router.post("/animal", animalController.create);
+router.post("/animal", upload.single("file"), animalController.create);
 router.get("/animals", animalController.findAll);
 router.get("/animal/:id", animalController.findById);
 router.put("/animal/:id", animalController.update);
 router.delete("/animal/:id", animalController.delete);
 
-import { AdoptionShelterController } from "../../../../controllers/AdoptionShelter/AdoptionShelterController";
+import { AdoptionShelterController } from "../../../../AdoptionShelter/controllers/AdoptionShelterController";
 
 const adoptionShelterController = new AdoptionShelterController();
 router.use(isAuthenticated);
 
-router.post("/adoptionShelter", adoptionShelterController.create);
+router.post("/adoptionShelter", upload.array("file"), adoptionShelterController.create);
 router.get("/adoptionShelters", adoptionShelterController.findAll);
 router.get("/adoptionShelter/:id", adoptionShelterController.findById);
 router.put("/adoptionShelter/:id", adoptionShelterController.update);

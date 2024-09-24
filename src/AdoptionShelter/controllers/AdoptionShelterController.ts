@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { ListAdoptionShelterService } from "../../services/AdoptionShelter/ListAdoptionShelterService"; 
-import { UpdateAdoptionShelterService } from "../../services/AdoptionShelter/UpdateAdoptionShelterService"; 
-import { DeleteAdoptionShelterService } from "../../services/AdoptionShelter/DeleteAdoptionShelterService"; 
-import { CreateAdoptionShelterService } from "../../services/AdoptionShelter/CreateAdoptionShelterService";
+import { UpdateAdoptionShelterService } from "../services/UpdateAdoptionShelterService"; 
+import { DeleteAdoptionShelterService } from "../services/DeleteAdoptionShelterService"; 
+import { CreateAdoptionShelterService } from "../services/CreateAdoptionShelterService";
 import AppError from "../../shared/error/AppError";
 
 class AdoptionShelterController {

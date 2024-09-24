@@ -2,7 +2,6 @@ import { hash } from "bcryptjs";
 import { AdoptionShelterRequest } from "../../@types/interfaces";
 import prismaClient from "../../prisma/prisma";
 import AppError from "../../shared/error/AppError";
-import { Animal } from "@prisma/client";
 
 class CreateAdoptionShelterService {
     async execute({
