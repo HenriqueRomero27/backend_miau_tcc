@@ -9,7 +9,13 @@ import { FindUserService } from "../../services/User/FindUserService";
 
 class UserController {
     async create(req: Request, res: Response) {
-        const {name, email, password, birthday, cpf, address, phone, created_at, updated_at} = req.body
+        const {name, email, password, birthday, cpf, phone, street,
+            cep,
+            complement,
+            neighborhood,
+            city,
+            state,
+            numberHouse, created_at, updated_at} = req.body
         const createUserService = new CreateUserService()
 
         const user = await createUserService.execute({
@@ -18,7 +24,13 @@ class UserController {
             password,
             birthday,
             cpf,
-            address,
+            street,
+            cep,
+            complement,
+            neighborhood,
+            city,
+            state,
+            numberHouse,
             phone,
             created_at,
             updated_at
@@ -45,17 +57,17 @@ class UserController {
 
     async findAll(req: Request, res: Response) {
         const findUserService = new FindUserService();
+        const users = await findUserService.findAll();
+        return res.json(users);
 
-        try {
-            const users = await findUserService.findAll();
-            return res.json(users);
-        } catch (error) {
-            if (error instanceof AppError) {
-                return res.status(error.statusCode || 500).json({ message: error.message });
-            }
-            // Em caso de erro desconhecido, retornar uma mensagem genérica
-            return res.status(500).json({ message: "Internal server error" });
-        }
+        // try {
+        // } catch (error) {
+        //     if (error instanceof AppError) {
+        //         return res.status(error.statusCode || 500).json({ message: error.message });
+        //     }
+        //     // Em caso de erro desconhecido, retornar uma mensagem genérica
+        //     return res.status(500).json({ message: "Internal server error" });
+        // }
     }
 
     async update(req: Request, res: Response) {

@@ -10,7 +10,13 @@ class DeleteUserService {
                 email: true,
                 phone: true,
                 birthday: true,
-                address: true,
+                street: true,
+                cep: true,
+                complement: true,
+                neighborhood: true,
+                city: true,
+                state: true,
+                numberHouse: true,
                 cpf: true
             }
         });

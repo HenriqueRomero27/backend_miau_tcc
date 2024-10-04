@@ -20,10 +20,6 @@ class UpdateUserService {
             }
         }
 
-        // Transformar o campo address para o formato esperado pelo Prisma
-        const addressUpdate = updateData.address ? {
-            update: updateData.address
-        } : undefined;
 
         // Hash da senha se fornecida
         if (updateData.password) {
@@ -34,7 +30,6 @@ class UpdateUserService {
             where: { id: userId },
             data: {
                 ...updateData,
-                address: addressUpdate
             } as Prisma.UserUpdateInput, // Explicitamente definir o tipo para UserUpdateInput
             select: {
                 id: true,
@@ -42,7 +37,6 @@ class UpdateUserService {
                 email: true,
                 phone: true,
                 birthday: true,
-                address: true,
                 cpf: true
             }
         });

@@ -11,7 +11,7 @@ class FindUserService {
                 email: true,
                 phone: true,
                 birthday: true,
-                address: true,
+                // address: true,
                 cpf: true
             }
         });
@@ -31,7 +31,7 @@ class FindUserService {
                 email: true,
                 phone: true,
                 birthday: true,
-                address: true,
+                // address: true,
                 cpf: true
             }
         });

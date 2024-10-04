@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ListAdoptionShelterService } from "../../services/AdoptionShelter/ListAdoptionShelterService"; 
+import { ListAdoptionShelterService } from "../services/ListAdoptionShelterService"; 
 import { UpdateAdoptionShelterService } from "../services/UpdateAdoptionShelterService"; 
 import { DeleteAdoptionShelterService } from "../services/DeleteAdoptionShelterService"; 
 import { CreateAdoptionShelterService } from "../services/CreateAdoptionShelterService";

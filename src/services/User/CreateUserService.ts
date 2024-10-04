@@ -4,13 +4,13 @@ import { hash } from "bcryptjs";
 import AppError from "../../shared/error/AppError";
 
 class CreateUserService {
-    async execute({name, email, password, phone, birthday, address: {street,
+    async execute({name, email, password, phone, birthday, street,
         cep,
         complement,
         neighborhood,
         city,
         state,
-        number}, cpf, created_at, updated_at}: UserRequest) {
+        numberHouse, cpf, created_at, updated_at}: UserRequest) {
         if (!email) {
             throw new AppError("Email incorreto", 400)
         }
@@ -35,13 +35,13 @@ class CreateUserService {
                 password: passwordHash,
                 phone: phone,
                 birthday: birthday,
-                address: {street,
-                    cep,
-                    complement,
-                    neighborhood,
-                    city,
-                    state,
-                    number},
+                street: street,
+                cep: cep,
+                complement: complement,
+                neighborhood: neighborhood,
+                city: city,
+                state: state,
+                numberHouse: numberHouse,
                 cpf: cpf,
                 created_at: created_at,
                 updated_at: updated_at
@@ -52,7 +52,6 @@ class CreateUserService {
                 email: true,
                 phone: true,
                 birthday: true,
-                address: true,
                 cpf: true
             }
         })
