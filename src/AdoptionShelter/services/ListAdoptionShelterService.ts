@@ -23,8 +23,16 @@ class ListAdoptionShelterService {
 
         return adoptionShelter;
     }
-    async findAll() {
+    async search(term: string) {
         const adoptionShelters = await prismaClient.adoptionShelter.findMany({
+            where: {
+                OR: [
+                    { name: { contains: term, mode: 'insensitive' } },
+                    { email: { contains: term, mode: 'insensitive' } },
+                    { phone: { contains: term, mode: 'insensitive' } },
+                    // Adicione outros campos que você deseja pesquisar
+                ]
+            },
             select: {
                 id: true,
                 name: true,
@@ -36,9 +44,10 @@ class ListAdoptionShelterService {
                 animals: true
             }
         });
-
+    
         return adoptionShelters;
     }
+    
 }
 
 export { ListAdoptionShelterService };

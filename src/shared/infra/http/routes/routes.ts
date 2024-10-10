@@ -44,8 +44,8 @@ const adoptionShelterController = new AdoptionShelterController();
 router.use(isAuthenticated);
 
 router.post("/adoptionShelter", adoptionShelterController.create);
-router.get("/adoptionShelters", adoptionShelterController.findAll);
-router.get("/adoptionShelter/:id", adoptionShelterController.findById);
+// router.get("/adoption-shelters/search", adoptionShelterController.search.bind(adoptionShelterController));
+router.get('/adoptionShelter/:id', (req, res) => adoptionShelterController.findById(req, res));
 router.put("/adoptionShelter/:id", adoptionShelterController.update);
 router.delete("/adoptionShelter/:id", adoptionShelterController.delete);
 
